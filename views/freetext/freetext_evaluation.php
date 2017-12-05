@@ -1,5 +1,8 @@
+<?
+$etask = $vote->etask;
+?>
 <h3>
-    <?= formatReady($vote['questiondata']['question']) ?>
+    <?= formatReady($etask->description) ?>
 </h3>
 
 

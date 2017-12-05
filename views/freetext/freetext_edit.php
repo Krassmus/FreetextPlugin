@@ -1,4 +1,8 @@
+<? $etask = $vote->etask ?>
 <label>
     <?= _("Frage") ?>
-    <textarea name="questions[<?= $vote->getId() ?>][questiondata][question]" placeholder="<?= _("Erzählen Sie uns ...") ?>"><?= isset($vote['questiondata']['question']) ? htmlReady($vote['questiondata']['question']) : "" ?></textarea>
+    <textarea name="questions[<?= $vote->getId() ?>][description]"
+              class="size-l wysiwyg"
+              placeholder="<?= _("Erzählen Sie uns ...") ?>"
+    ><?= isset($etask->description) ? wysiwygReady($etask->description) : "" ?></textarea>
 </label>

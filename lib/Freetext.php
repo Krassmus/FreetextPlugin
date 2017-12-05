@@ -2,6 +2,8 @@
 
 require_once 'lib/classes/QuestionType.interface.php';
 
+use eTask\Task;
+
 class Freetext extends QuestionnaireQuestion implements QuestionType
 {
     static public function getIcon($active = false, $add = false)
@@ -25,8 +27,21 @@ class Freetext extends QuestionnaireQuestion implements QuestionType
     public function createDataFromRequest()
     {
         $questions = Request::getArray("questions");
-        $question_data = $questions[$this->getId()];
-        $this->setData($question_data);
+        $data = $questions[$this->getId()];
+
+        if ($this->etask) {
+            $this->etask = Task::create(
+                [
+                    'type' => self::TYPE,
+                    'user_id' => $GLOBALS['user']->id,
+                ]
+            );
+        }
+
+        $this->etask->description = Studip\Markup::purifyHtml($data['description']);
+        $this->etask->task = [];
+
+        $this->etask->store();
     }
 
     public function getDisplayTemplate()
@@ -41,8 +56,8 @@ class Freetext extends QuestionnaireQuestion implements QuestionType
     {
         $answer = $this->getMyAnswer();
         $answers = Request::getArray("answers");
-        $answer_data = $answers[$this->getId()];
-        $answer->setData($answer_data);
+        $userAnswerText = $answers[$this->getId()]['text'];
+        $answer->setData(['answerData' => ['text' => $userAnswerText]]);
         return $answer;
     }
 
