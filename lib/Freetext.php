@@ -30,12 +30,10 @@ class Freetext extends QuestionnaireQuestion implements QuestionType
         $data = $questions[$this->getId()];
 
         if ($this->etask) {
-            $this->etask = Task::create(
-                [
-                    'type' => self::TYPE,
-                    'user_id' => $GLOBALS['user']->id,
-                ]
-            );
+            $this->etask = Task::create([
+                'type' => self::TYPE,
+                'user_id' => $GLOBALS['user']->id,
+            ]);
         }
 
         $this->etask->description = Studip\Markup::purifyHtml($data['description']);
