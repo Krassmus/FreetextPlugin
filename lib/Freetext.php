@@ -29,9 +29,9 @@ class Freetext extends QuestionnaireQuestion implements QuestionType
         $questions = Request::getArray("questions");
         $data = $questions[$this->getId()];
 
-        if ($this->etask) {
+        if (!$this->etask) {
             $this->etask = Task::create([
-                'type' => self::TYPE,
+                'type' => "freetext",
                 'user_id' => $GLOBALS['user']->id,
             ]);
         }
@@ -54,7 +54,7 @@ class Freetext extends QuestionnaireQuestion implements QuestionType
     {
         $answer = $this->getMyAnswer();
         $answers = Request::getArray("answers");
-        $userAnswerText = $answers[$this->getId()]['text'];
+        $userAnswerText = $answers[$this->getId()]['answerdata']['text'];
         $answer->setData(['answerData' => ['text' => $userAnswerText]]);
         return $answer;
     }
