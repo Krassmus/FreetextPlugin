@@ -1,6 +1,6 @@
 pluginname=FreetextPlugin
 pluginclassname=FreetextPlugin
-version=1.2
+version=1.2.1
 origin=data-quest
 studipMinVersion=4.0
-studipMaxVersion=4.1.99
+studipMaxVersion=4.99.99
