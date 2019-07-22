@@ -4,3 +4,4 @@ version=1.2.1
 origin=data-quest
 studipMinVersion=4.0
 studipMaxVersion=4.99.99
+description=Dieses Plugin stellt den Fragetyp "Freitext" für Fragebögen bereit.
