@@ -70,10 +70,16 @@ class Freetext extends QuestionnaireQuestion implements QuestionType
     public function getResultArray()
     {
         $output = [];
+        $count_nobodies = 0;
 
         $question = trim(strip_tags($this->etask->description));
         foreach ($this->answers as $key => $answer) {
-            $user_id = $answer['user_id'] !== "nobody" ? $answer['user_id'] : "anonym_".$key;
+            if ($answer['user_id'] && $answer['user_id'] != 'nobody') {
+                $user_id = $answer['user_id'];
+            } else {
+                $count_nobodies += 1;
+                $user_id = _('unbekannt') . ' ' . $count_nobodies;
+            }
             $output[$question][$user_id] = $answer['answerdata']['text'];
         }
 
